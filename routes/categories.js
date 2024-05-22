@@ -5,7 +5,10 @@ const {
   createCategory,
   findCategoryById,
   updateCategory,
-  deleteCategory
+  deleteCategory,
+  checkIsCategoryExists,
+  checkEmptyName,
+  
 } = require("../middlewares/categories");
 const {
   sendAllCategories,
@@ -15,19 +18,25 @@ const {
   sendCategoryDeleted
 } = require("../controllers/categories");
 
+
 categoriesRouter.get("/categories", findAllCategories, sendAllCategories);
+
+categoriesRouter.get("/categories/:id", findCategoryById, sendCategoryById);
+
 categoriesRouter.post(
   "/categories",
   findAllCategories,
+  checkIsCategoryExists,
+  checkEmptyName,
   createCategory,
   sendCategoryCreated,
-  sendCategoryUpdated
 );
-categoriesRouter.get("/categories/:id", findCategoryById, sendCategoryById);
+
 categoriesRouter.put(
-  "/categories/:id", // Слушаем запросы по эндпоинту
-  updateCategory, // Обновляем запись в MongoDB
-  sendCategoryUpdated // Возвращаем ответ на клиент
+  "/categories/:id",
+  checkEmptyName,
+  updateCategory,
+  sendCategoryUpdated
 ); 
 
 categoriesRouter.delete("/categories/:id", deleteCategory, sendCategoryDeleted);
