@@ -1,7 +1,7 @@
 const users = require("../models/user.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const path = require("path");
 const login = (req, res) => {
   const { email, password } = req.body;
 
@@ -12,15 +12,35 @@ const login = (req, res) => {
       const token = jwt.sign({ _id: user._id }, "some-secret-key", {
         expiresIn: 3600,
       });
-    })
-    .then((user, token) => {
-      res
-        .status(200)
-        .send({ _id: user._id, username: user.username, email: user.email, jwt: token });
+      res.status(200).send({
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        jwt: token,
+      });
     })
     .catch((error) => {
       res.status(401).send({ message: error.message });
     });
 };
 
-module.exports = { login };
+const sendIndex = (req, res) => {
+  if (req.cookies.jwt) {
+    try {
+      jwt.verify(req.cookies.jwt, "some-secret-key");
+      //  return res.sendFile(
+      //   path.join(__dirname, "../public/admin/dashboard.html") ?? --> Плохой вариант — так не работает перенаправление
+      // );
+      return res.redirect("/admin/dashboard"); //> Хороший вариант
+    } catch (err) {
+      res.sendFile(path.join(__dirname, "../public/index.html"));
+    }
+  }
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+};
+
+const sendDashboard = (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/admin/dashboard.html"));
+};
+
+module.exports = { login, sendIndex, sendDashboard };

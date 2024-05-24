@@ -21,12 +21,13 @@ const userSchema = new mongoose.Schema({
 // Добавим метод findUserByCredentials схеме пользователя,
 // у него будет два параметра: почта и пароль
 userSchema.statics.findUserByCredentials = function (email, password) {
+  console.log(email, password);
   // Попытаемся найти пользователя по почте
   return this.findOne({ email }) // this — это модель users
     .then((user) => {
       if (!user) {
         // Не нашёлся — отклоняем промис
-        return Promise.reject(new Error("Неправильные почта или пароль"));
+        return Promise.reject(new Error("Неправильные почта //или пароль"));
       }
 
       // Нашёлся — сравниваем хеши
