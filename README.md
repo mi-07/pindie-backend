@@ -1,7 +1,5 @@
-# Pindie BackEnd Project
+Ссылка на репозиторий с фронтендом: https://github.com/mi-07/pindie-frontend
 
-This repository is specialy for pindie backend project. (PBEP)
+Ссылка на домен фронтенда: https://cat-made-pindie-frontend.nomorepartiesco.ru
 
-_powered by Node.js and Express_
-
-### Made specialy for [Yandex Practicum courses (YaP)](https://practicum.yandex.ru)
+IP-адрес: 158.160.153.227
