@@ -22,7 +22,7 @@ const findAllGames = async (req, res, next) => {
 
 const findGameById = async (req, res, next) => {
   try {
-    req.game = await games.findById(req.params.id).populate("games").populate({
+    req.game = await games.findById(req.params.id).populate({
       path: "users",
       select: "-password",
     });
