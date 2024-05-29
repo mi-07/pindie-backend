@@ -8,7 +8,6 @@ const cookieParser = require("cookie-parser");
 
 const pagesRouter = require("./routes/pages");
 
-
 // Конфигурация приложения
 const PORT = 3001;
 const app = express();
@@ -17,7 +16,7 @@ connectToDatabase();
 // Импорт и инициализация роутов
 app.use(
   cors,
-  cookieParser(), //> Добавляем миддлвар для работы с куки
+  cookieParser(),
   bodyParser.json(),
   pagesRouter, // Добавляем роутер для страниц
   apiRouter, //> Добавляем

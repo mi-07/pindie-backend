@@ -35,7 +35,6 @@ userSchema.statics.findUserByCredentials = function (email, password) {
         if (!matched) {
           return Promise.reject(new Error("Неправильные почта или пароль"));
         }
-
         return user; // Теперь user доступен
       });
     });

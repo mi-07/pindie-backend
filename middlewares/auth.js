@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 const checkAuth = (req, res, next) => {
   const { authorization } = req.headers;
-
   if (!authorization || !authorization.startsWith("Bearer ")) {
     return res
       .status(401)
@@ -24,6 +23,6 @@ const checkCookiesJWT = (req, res, next) => {
   }
   req.headers.authorization = `Bearer ${req.cookies.jwt}`;
   next();
-}; 
+};
 
 module.exports = { checkAuth, checkCookiesJWT };

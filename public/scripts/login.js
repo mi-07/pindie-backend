@@ -2,7 +2,7 @@ import { showTooltip } from "./dom-creators.js";
 
 const form = document.querySelector(".auth-form");
 form &&
-  form.addEventListener("submit", async event => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
     try {
@@ -14,6 +14,8 @@ form &&
         body: JSON.stringify(Object.fromEntries(formData)),
       });
       if (response.status !== 200) {
+        document.cookie =
+          "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         throw new Error((await response.json()).message);
       }
       const result = await response.json();
