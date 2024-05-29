@@ -5,6 +5,7 @@ const allowedCors = [
   "http://localhost:3001",
   "https://cat-lolofd-pindie-backend.nomorepartiesco.ru",
   "http://cat-lolofd-pindie-backend.nomorepartiesco.ru",
+  "cat-made-pindie-frontend.nomorepartiesco.ru",
 ];
 
 function cors(req, res, next) {
